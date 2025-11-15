@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_id')->constrained()->cascadeOnDelete();
+            $table->date('date');
+            $table->enum('status', ['present', 'absent', 'late']);
+            $table->text('note')->nullable();
+            $table->unsignedBigInteger('recorded_by')->nullable(); 
             $table->timestamps();
+
+            $table->unique(['student_id', 'date']);
         });
     }
 
