@@ -11,7 +11,7 @@ class AttendanceBulkStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class AttendanceBulkStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'date'                 => ['required', 'date'],
+            'records'              => ['required', 'array', 'min:1'],
+            'records.*.student_id' => ['required', 'integer', 'exists:students,id'],
+            'records.*.status'     => ['required', 'in:present,absent,late'],
+            'records.*.note'       => ['nullable', 'string'],
         ];
     }
 }
