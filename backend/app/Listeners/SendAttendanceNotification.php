@@ -6,6 +6,8 @@ use App\Events\AttendanceRecorded;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
+use Illuminate\Support\Facades\Log;
+
 class SendAttendanceNotification
 {
     /**
@@ -21,6 +23,11 @@ class SendAttendanceNotification
      */
     public function handle(AttendanceRecorded $event): void
     {
-        //
+        Log::info('Attendance recorded', [
+            'student_id' => $event->attendance->student_id,
+            'date'       => $event->attendance->date->toDateString(),
+            'status'     => $event->attendance->status,
+        ]);
+        
     }
 }
