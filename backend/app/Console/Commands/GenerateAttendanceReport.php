@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-use App\Service\App\Services\AttendanceService;
+use App\Services\AttendanceService;
 use Carbon\Carbon;
 
 class GenerateAttendanceReport extends Command
