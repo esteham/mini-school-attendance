@@ -39,15 +39,7 @@ const chartOptions = {
       },
     },
     datalabels: {
-      anchor: 'start',
-      align: 'bottom',
-      formatter: (value) => `${value}%`,
-      font: {
-        color: 'white',
-        weight: 'bold',
-        size: 10,
-      },
-      clamp: true,
+      display: false,
     },
     tooltip: {
       callbacks: {
