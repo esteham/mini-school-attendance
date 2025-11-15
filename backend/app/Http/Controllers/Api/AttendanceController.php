@@ -40,12 +40,14 @@ class AttendanceController extends Controller
             'year'  => ['required', 'integer'],
             'month' => ['required', 'integer', 'between:1,12'],
             'class' => ['nullable', 'string'],
+            'section' => ['nullable', 'string'],
         ]);
 
         $report = $this->attendanceService->monthlyReport(
             $validated['year'],
             $validated['month'],
-            $validated['class'] ?? null
+            $validated['class'] ?? null,
+            $validated['section'] ?? null
         );
 
         return response()->json($report);

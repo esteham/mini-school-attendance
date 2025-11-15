@@ -33,7 +33,6 @@ class AttendanceService
                 AttendanceRecorded::dispatch($attendance);
             }
 
-            // cache invalidate (আজকের attendance stats)
             Cache::forget($this->getDailyStatsCacheKey($date));
         });
     }
@@ -60,7 +59,7 @@ class AttendanceService
         });
     }
 
-    public function monthlyReport(int $year, int $month, ?string $class = null): array
+    public function monthlyReport(int $year, int $month, ?string $class = null, ?string $section = null): array
     {
         $start = Carbon::create($year, $month, 1)->startOfMonth();
         $end   = (clone $start)->endOfMonth();
@@ -73,10 +72,16 @@ class AttendanceService
             });
         }
 
-        $records = $query->get(); // eager loaded
+        if ($section) {
+            $query->whereHas('student', function ($q) use ($section) {
+                $q->where('section', $section);
+            });
+        }
+
+        $records = $query->get();
 
         $grouped = $records->groupBy('student_id')->map(function ($attendances, $studentId) {
-            /** @var Student $student */
+            
             $student = $attendances->first()->student;
 
             $present = $attendances->where('status', 'present')->count();
@@ -108,6 +113,7 @@ class AttendanceService
             'year'    => $year,
             'month'   => $month,
             'class'   => $class,
+            'section' => $section,
             'records' => $grouped,
         ];
     }

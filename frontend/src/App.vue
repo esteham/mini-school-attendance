@@ -1,20 +1,42 @@
+<script setup>
+import { RouterLink, RouterView, useRoute } from 'vue-router'
+
+const route = useRoute()
+
+const isActive = (path) => route.path === path
+
+const menu = [
+  { label: 'Dashboard', to: '/' },
+  { label: 'Students', to: '/students' },
+  { label: 'Attendance', to: '/attendance' },
+]
+</script>
+
 <template>
-  <div class="min-h-screen flex">
-    <aside class="w-64 bg-gray-800 text-white p-4 space-y-4">
-      <h1 class="text-xl font-bold">Mini School Attendance</h1>
-      <nav class="space-y-2">
-        <RouterLink to="/" class="block hover:underline">Dashboard</RouterLink>
-        <RouterLink to="/students" class="block hover:underline">Students</RouterLink>
-        <RouterLink to="/attendance" class="block hover:underline">Attendance</RouterLink>
+  <div class="min-h-screen flex bg-gray-100">
+    <!-- Sidebar -->
+    <aside class="w-70 bg-white border-r shadow-sm p-6 flex flex-col space-y-6">
+      <h1 class="text-2xl font-bold text-gray-800 tracking-tight">Mini School Attendance</h1>
+
+      <nav class="flex flex-col space-y-1">
+        <RouterLink
+          v-for="item in menu"
+          :key="item.to"
+          :to="item.to"
+          class="flex items-center gap-3 px-4 py-2 rounded-xl transition-all"
+          :class="
+            isActive(item.to) ? 'bg-blue-600 text-white shadow' : 'text-gray-600 hover:bg-gray-100'
+          "
+        >
+          <component :is="item.icon" class="w-5 h-5" />
+          <span class="font-medium">{{ item.label }}</span>
+        </RouterLink>
       </nav>
     </aside>
 
-    <main class="flex-1 p-6 bg-gray-100">
+    <!-- Main content -->
+    <main class="flex-1 p-8">
       <RouterView />
     </main>
   </div>
 </template>
-
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
