@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\Attendance;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -17,10 +18,10 @@ class AttendanceRecorded
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct(public Attendance $attendance)
     {
         //
     }
 
-    
+
 }

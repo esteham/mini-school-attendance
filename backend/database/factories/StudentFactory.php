@@ -17,7 +17,11 @@ class StudentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'student_id' => $this->faker->unique()->numerify('STU###'),
+            'class' => '9',
+            'section' => 'A',
+            'photo' => null,
         ];
     }
 }

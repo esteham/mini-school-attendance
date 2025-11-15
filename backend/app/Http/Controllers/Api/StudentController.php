@@ -22,6 +22,10 @@ class StudentController extends Controller
             $query->where('class', $request->class);
         }
 
+        if ($request->filled('section')) {
+            $query->where('section', $request->section);
+        }
+
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {

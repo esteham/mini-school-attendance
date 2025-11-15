@@ -11,8 +11,9 @@ import {
   CategoryScale,
   LinearScale,
 } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ChartDataLabels)
 
 const todayStats = ref(null)
 const monthlyData = ref(null)
@@ -25,6 +26,16 @@ const chartData = ref({
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
+  plugins: {
+    datalabels: {
+      anchor: 'end',
+      align: 'top',
+      formatter: (value) => `${value}%`,
+      font: {
+        weight: 'bold',
+      },
+    },
+  },
 }
 
 const loadToday = async () => {
