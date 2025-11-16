@@ -325,9 +325,15 @@ const hasStudents = computed(() => students.value.length > 0)
                 <td class="px-3 py-2">
                   <div class="flex items-center gap-2">
                     <div
-                      class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-600"
+                      class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-50 text-xs font-semibold text-blue-600 overflow-hidden"
                     >
-                      {{ s.photo || '?' }}
+                      <img
+                        v-if="s.photo"
+                        :src="s.photo"
+                        alt="Student Photo"
+                        class="h-full w-full object-cover rounded-full"
+                      />
+                      <span v-else>?</span>
                     </div>
                     <div>
                       <div class="font-medium text-gray-900">
