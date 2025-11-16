@@ -6,6 +6,7 @@
 * Initial skeleton code for REST API endpoints
 * Initial version of Dashboard and Attendance UI using Vue 3 Composition API
 * Writing the initial draft of README / AI_WORKFLOW
+* Took the full Docker setup from ChatGPT
 
 Primary tools:
 
