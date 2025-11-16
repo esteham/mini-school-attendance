@@ -2,19 +2,29 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Tests\TestCase;
+use App\Models\Student;
+use App\Models\User;
+use Pest\Laravel\actingAs;
+use Pest\Laravel\postJson;
 
-class StudentApiTest extends TestCase
-{
-    /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
+it('can bulk store attendance', function () {
+    $user = User::factory()->create();
+    actingAs($user);
 
-        $response->assertStatus(200);
-    }
-}
+    $students = Student::factory()->count(2)->create();
+
+    $payload = [
+        'date'    => now()->toDateString(),
+        'records' => $students->map(function ($s) {
+            return [
+                'student_id' => $s->id,
+                'status'     => 'present',
+                'note'       => null,
+            ];
+        })->toArray(),
+    ];
+
+    $response = postJson('/api/attendance/bulk', $payload);
+
+    $response->assertOk()->assertJsonPath('message', 'Attendance saved');
+});
