@@ -8,6 +8,7 @@ use App\Http\Requests\StudentUpdateRequest;
 use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class StudentController extends Controller
 {
@@ -34,7 +35,7 @@ class StudentController extends Controller
             });
         }
 
-        $students = $query->orderBy('class')->orderBy('section')->paginate(10);
+        $students = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return StudentResource::collection($students);
     }
@@ -44,7 +45,18 @@ class StudentController extends Controller
      */
     public function store(StudentStoreRequest $request)
     {
-        $student = Student::create($request->validated());
+        $data = $request->validated();
+
+        // Generate auto student_id
+        $lastStudent = Student::orderBy('id', 'desc')->first();
+        $nextId = $lastStudent ? intval(substr($lastStudent->student_id, 3)) + 1 : 1;
+        $data['student_id'] = 'STU' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+
+        if ($request->hasFile('photo')) {
+            $data['photo'] = $request->file('photo')->store('photos', 'public');
+        }
+
+        $student = Student::create($data);
 
         return new StudentResource($student);
     }
@@ -62,7 +74,17 @@ class StudentController extends Controller
      */
     public function update(StudentUpdateRequest $request, Student $student)
     {
-        $student->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            // Delete old photo if exists
+            if ($student->photo && Storage::disk('public')->exists($student->photo)) {
+                Storage::disk('public')->delete($student->photo);
+            }
+            $data['photo'] = $request->file('photo')->store('photos', 'public');
+        }
+
+        $student->update($data);
 
         return new StudentResource($student);
     }
@@ -72,6 +94,11 @@ class StudentController extends Controller
      */
     public function destroy(Student $student)
     {
+        // Delete photo if exists
+        if ($student->photo && Storage::disk('public')->exists($student->photo)) {
+            Storage::disk('public')->delete($student->photo);
+        }
+
         $student->delete();
 
         return response()->json(['message' => 'Deleted']);

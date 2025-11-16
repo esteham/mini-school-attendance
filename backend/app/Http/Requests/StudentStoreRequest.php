@@ -23,10 +23,9 @@ class StudentStoreRequest extends FormRequest
     {
         return [
             'name'       => ['required', 'string', 'max:255'],
-            'student_id' => ['required', 'string', 'max:50', 'unique:students,student_id'],
             'class'      => ['required', 'string', 'max:50'],
             'section'    => ['required', 'string', 'max:50'],
-            'photo'      => ['nullable', 'string', 'max:255'],
+            'photo'      => ['nullable', 'file', 'image', 'max:2048'],
         ];
     }
 }

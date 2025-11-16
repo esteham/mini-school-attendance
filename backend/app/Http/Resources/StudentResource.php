@@ -20,7 +20,7 @@ class StudentResource extends JsonResource
             'student_id' => $this->student_id,
             'class'      => $this->class,
             'section'    => $this->section,
-            'photo'      => $this->photo,
+            'photo'      => $this->photo ? asset('storage/' . $this->photo) : null,
             'created_at' => $this->created_at?->toDateTimeString(),
         ];
     }

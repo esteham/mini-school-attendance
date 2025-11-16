@@ -25,16 +25,9 @@ class StudentUpdateRequest extends FormRequest
     {
         return [
             'name'       => ['sometimes', 'required', 'string', 'max:255'],
-            'student_id' => [
-                'sometimes',
-                'required',
-                'string',
-                'max:50',
-                Rule::unique('students', 'student_id')->ignore($this->student),
-            ],
             'class'      => ['sometimes', 'required', 'string', 'max:50'],
             'section'    => ['sometimes', 'required', 'string', 'max:50'],
-            'photo'      => ['nullable', 'string', 'max:255'],
+            'photo'      => ['nullable', 'file', 'image', 'max:2048'],
         ];
     }
 }
