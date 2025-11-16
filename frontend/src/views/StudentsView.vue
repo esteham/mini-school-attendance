@@ -103,14 +103,14 @@ onMounted(() => {
             v-model="search"
             type="text"
             placeholder="Search by name or student ID"
-            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-9 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
         </div>
 
         <!-- Class filter -->
         <div class="relative w-full sm:w-55">
           <span
-            class="pointer-events-none absolute inset-y-0 left-1 flex items-center text-gray-400 text-xs uppercase"
+            class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-gray-400 text-xs uppercase"
           >
             Class
           </span>
@@ -118,7 +118,7 @@ onMounted(() => {
             v-model="filterClass"
             type="text"
             placeholder="e.g. 10, 9, 8"
-            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-12 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
         </div>
       </div>

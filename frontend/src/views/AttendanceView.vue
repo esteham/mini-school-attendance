@@ -140,7 +140,7 @@ const hasStudents = computed(() => students.value.length > 0)
         <!-- Class -->
         <div class="relative flex-1 min-w-[180px]">
           <span
-            class="pointer-events-none absolute inset-y-0 left-1 flex items-center text-gray-400 text-xs uppercase"
+            class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-gray-400 text-xs uppercase"
           >
             Class
           </span>
@@ -148,14 +148,14 @@ const hasStudents = computed(() => students.value.length > 0)
             v-model="selectedClass"
             type="text"
             placeholder="e.g. 9, 10"
-            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-16 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
         </div>
 
         <!-- Section -->
         <div class="relative flex-1 min-w-[120px]">
           <span
-            class="pointer-events-none absolute inset-y-0 left-1 flex items-center text-gray-400 text-xs uppercase"
+            class="pointer-events-none absolute inset-y-0 left-2 flex items-center text-gray-400 text-xs uppercase"
           >
             Section
           </span>
@@ -163,7 +163,7 @@ const hasStudents = computed(() => students.value.length > 0)
             v-model="selectedSection"
             type="text"
             placeholder="Optional"
-            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-10 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+            class="w-full rounded-xl border border-gray-200 bg-gray-50 pl-15 pr-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
           />
         </div>
 
