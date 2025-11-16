@@ -62,7 +62,7 @@ onMounted(() => {
   <div class="space-y-6">
     <!-- Header -->
     <div
-      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-gradient-to-r from-blue-500 via-indigo-600 to-blue-700 rounded-2xl px-6 py-4 shadow-sm text-white"
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-600 rounded-2xl px-6 py-4 shadow-sm text-white"
     >
       <div>
         <h2 class="text-2xl font-semibold tracking-tight">Students</h2>

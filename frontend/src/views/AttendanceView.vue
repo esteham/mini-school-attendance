@@ -102,7 +102,7 @@ const hasStudents = computed(() => students.value.length > 0)
   <div class="space-y-6">
     <!-- Header -->
     <div
-      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 rounded-2xl px-6 py-4 shadow-sm text-white mb-3"
+      class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-gradient-to-r from-blue-400 via-indigo-300 to-blue-600 rounded-2xl px-6 py-4 shadow-sm text-white mb-3"
     >
       <div>
         <h2 class="text-2xl font-semibold tracking-tight">Attendance</h2>
