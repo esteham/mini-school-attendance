@@ -18,6 +18,7 @@ Route::delete('/students/{student}', [StudentController::class, 'destroy']);
 // Attendance
 Route::post('/attendance/bulk', [AttendanceController::class, 'bulkStore']);
 Route::get('/attendance', [AttendanceController::class, 'index']);
+Route::get('/attendance/check', [AttendanceController::class, 'checkAttendance']);
 Route::get('/attendance/daily-stats', [AttendanceController::class, 'dailyStats']);
 Route::get('/attendance/monthly-report', [AttendanceController::class, 'monthlyReport']);
 

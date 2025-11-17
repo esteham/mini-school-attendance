@@ -25,6 +25,24 @@ const loadStudents = async () => {
   success.value = ''
 
   try {
+    // Check if attendance is already recorded for this class/section/date
+    const checkParams = {
+      date: date.value,
+      class: selectedClass.value,
+    }
+    if (selectedSection.value) {
+      checkParams.section = selectedSection.value
+    }
+    const checkRes = await api.get('/attendance/check', { params: checkParams })
+    if (checkRes.data.recorded) {
+      error.value = 'This class and section attendance already completed that date.'
+      setTimeout(() => {
+        error.value = ''
+      }, 6000)
+      alert(error.value)
+      return
+    }
+
     const params = {
       class: selectedClass.value,
       per_page: 100,

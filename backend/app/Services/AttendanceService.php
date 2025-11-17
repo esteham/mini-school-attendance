@@ -118,6 +118,25 @@ class AttendanceService
         ];
     }
 
+    public function isAttendanceRecorded(string $date, ?string $class = null, ?string $section = null): bool
+    {
+        $query = Attendance::whereDate('date', $date);
+
+        if ($class) {
+            $query->whereHas('student', function ($q) use ($class) {
+                $q->where('class', $class);
+            });
+        }
+
+        if ($section) {
+            $query->whereHas('student', function ($q) use ($section) {
+                $q->where('section', $section);
+            });
+        }
+
+        return $query->exists();
+    }
+
     protected function getDailyStatsCacheKey(string $date): string
     {
         return "attendance:stats:{$date}";

@@ -67,4 +67,24 @@ class AttendanceController extends Controller
 
         return AttendanceResource::collection($attendances);
     }
+
+    public function checkAttendance(Request $request)
+    {
+        $validated = $request->validate([
+            'date' => ['required', 'date'],
+            'class' => ['nullable', 'string'],
+            'section' => ['nullable', 'string'],
+        ]);
+
+        $isRecorded = $this->attendanceService->isAttendanceRecorded(
+            $validated['date'],
+            $validated['class'] ?? null,
+            $validated['section'] ?? null
+        );
+
+        return response()->json([
+            'recorded' => $isRecorded,
+            'message' => $isRecorded ? 'Attendance already completed.' : 'Attendance not recorded yet.',
+        ]);
+    }
 }
